@@ -50,10 +50,16 @@ class QREnv:
 
 
     BOT_NAME = 'TEST'
-    QUEUES = ['test']
-    STORAGES = ['test']
-    VAULTS = ['test','test1']
-
     HEADLESS = False
     SELENIUM_SPEED = None
     TIMEOUT = 30
+    CONSECUTIVE_ERROR_RETRY = 3
+
+    
+    QUEUE_NAMES = ['test']
+    STORAGE_NAMES = ['test']
+    VAULT_NAMES = ['test','test1']
+
+    QUEUES = {}
+    STORAGES = {}
+    VAULTS = {}

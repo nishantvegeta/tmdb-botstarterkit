@@ -1,13 +1,16 @@
 from abc import ABC, abstractmethod
+from QRObserver import QRPublisher
+from qrlib.QRRunItem import QRRunItem
 
-class QRProcess(ABC):
-    
-    @abstractmethod
-    def update_component_run_item(self):
-        pass
+class QRProcess(ABC, QRPublisher):
+
+    def __init__(self):
+        for base_class in QRProcess.__bases__:
+             base_class.__init__(self)
+        self.run_item: QRRunItem = None
 
     @abstractmethod
-    def pre_run_item(self, *args, **kwargs):
+    def before_run_item(self, *args, **kwargs):
         pass
 
     @abstractmethod
@@ -15,11 +18,11 @@ class QRProcess(ABC):
         pass
 
     @abstractmethod
-    def post_run_item(self, *args, **kwargs):
+    def after_run_item(self, *args, **kwargs):
         pass
 
     @abstractmethod
-    def pre_run(self, *args, **kwargs):
+    def before_run(self, *args, **kwargs):
         pass
 
     @abstractmethod
@@ -27,5 +30,5 @@ class QRProcess(ABC):
         pass
 
     @abstractmethod
-    def post_run(self, *args, **kwargs):
+    def after_run(self, *args, **kwargs):
         pass

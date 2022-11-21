@@ -16,7 +16,7 @@ def run_item_tt(post_success=True, post_error=True):
             run_item= QRRunItem(logger_name=logger_name, is_ticket=True, queue=queue, queue_item=queue_item)
             
             self.run_item = run_item
-            self.update_component_run_item()
+            self.notify()
             
             kwargs['run_item'] = run_item
             
@@ -45,7 +45,7 @@ def run_item_tf(post_success=False, post_error=True):
             run_item= QRRunItem(logger_name=logger_name, is_ticket=False)
 
             self.run_item = run_item
-            self.update_component_run_item()
+            self.notify()
 
             kwargs['run_item'] = run_item
             try:

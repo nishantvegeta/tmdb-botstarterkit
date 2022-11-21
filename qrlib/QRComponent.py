@@ -1,11 +1,11 @@
-from abc import ABC, abstractmethod
+from QRObserver import QRSubscriber
+from qrlib.QRObserver import QRPublisher
+from qrlib.QRRunItem import QRRunItem
 
-class QRComponent(ABC):
+class QRComponent(QRSubscriber):
 
-    @abstractmethod
-    def setup(self):
-        pass
+    def __init__(self):
+        self.run_item: QRRunItem = None
 
-    @abstractmethod
-    def teardown(self):
-        pass
+    def update(self, publisher: QRPublisher):
+        self.run_item = publisher.run_item
