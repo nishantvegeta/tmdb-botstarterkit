@@ -40,13 +40,13 @@ class QRQueue:
         else:
             pass
 
-    def create_new_items_from_list(self, items: list, aon: bool = True) -> None:
+    def create_new_items_from_list(self, items: list) -> None:
         if(QREnv.NO_PLATFORM):
             return True
         else:
             pass
 
-    def create_new_items_from_csv(self, file_path: str, aon: bool = True) -> None:
+    def create_new_items_from_csv(self, file_path: str) -> None:
         if(QREnv.NO_PLATFORM):
             return True
         else:
