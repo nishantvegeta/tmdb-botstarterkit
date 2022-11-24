@@ -7,9 +7,7 @@ class DefaultProcess(QRProcess):
     
     def __init__(self):
         super().__init__()
-        self.browser = Selenium()
-        self.default_component = DefaultComponent(self.browser)
-        self.register(self.default_component)
+        self.default_component = DefaultComponent(self)
         self.data = []
 
 

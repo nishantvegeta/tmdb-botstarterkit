@@ -7,8 +7,9 @@ from qrlib.QREnv import QREnv
 
 class DefaultComponent(QRComponent):
     
-    def __init__(self, browser):
-        self.browser = browser
+    def __init__(self, process):
+        super().__init__(process)
+
 
     def login(self):
         try:
