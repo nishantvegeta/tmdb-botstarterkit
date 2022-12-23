@@ -7,6 +7,15 @@ class DefaultProcess(QRProcess):
     
     def __init__(self):
         super().__init__()
+        """
+        _subscriber=set
+        def register
+        def unregister
+        def notify
+        #
+        run_item
+        """
+
         self.default_component = DefaultComponent(self)
         self.data = []
 
@@ -15,9 +24,11 @@ class DefaultProcess(QRProcess):
     def execute_run_item(self, *args, **kwargs):
         self.default_component.test()
 
-    @run_item_tf()
+    #@run_item_tf()
     def before_run(self, *args, **kwargs):  
-        self.default_component.login()
+        #self.default_component.login()
+        queue_items = self.default_component.get_queue_items()
+        self.default_component.change_queue_items(queue_items)
         self.data = ["a","b"]
 
     @run_item_tf()

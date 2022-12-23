@@ -4,7 +4,7 @@ import os
 class QREnv:
 
     # IDENTIFIER = BuiltIn().get_variable_value("${identifier}") # Get from env variable later
-    IDENTIFIER = "d847ffb1-a803-4ede-ab57-f44776257b69"
+    IDENTIFIER = "2cad8719-efae-4c26-a6e7-8bf6532ec796"
     VERIFY_SSL = False
     TEST_SETUP_ONLY = False
     DEBUG = True
@@ -22,9 +22,9 @@ class QREnv:
     ENV_PRODUCTION = "PRODUCTION"
 
     # URLS
-    URL_LOCAL = "http://localhost:8000/api/v1"
-    URL_QR_DEV_URL = "http://13.58.117.7:8000/api/v1"
-    URL_QR_UAT_URL = "http://13.58.117.7:8000/api/v1"
+    URL_LOCAL = "http://127.0.0.1:8000/api/v1/"
+    URL_QR_DEV_URL = "http://13.58.117.7:8000/api/v1/"
+    URL_QR_UAT_URL = "http://13.58.117.7:8000/api/v1/"
     URL_UAT_URL = ""
     URL_PROD = ""
 
@@ -37,7 +37,7 @@ class QREnv:
     }
 
     # ENVIRONMENT = os.environ.get("ENVIRONMENT")
-    ENVIRONMENT = ENV_QR_UAT
+    ENVIRONMENT = ENV_LOCAL
     
     try:
         BASE_URL = ENV_URL[ENVIRONMENT]

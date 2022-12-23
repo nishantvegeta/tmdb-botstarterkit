@@ -12,7 +12,7 @@ class Bot(QRBot):
 
     def start(self):
         self.dp.before_run()
-        self.dp.run()
+        #self.dp.run()
 
     def teardown(self):
         self.dp.after_run()

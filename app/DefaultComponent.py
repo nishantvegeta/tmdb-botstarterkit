@@ -4,6 +4,9 @@ from qrlib.QRComponent import QRComponent
 from qrlib.QRRunItem import QRRunItem
 from qrlib.QREnv import QREnv
 
+from qrlib.QRQueue import QRQueue
+from qrlib.QRQueueItem import QueueItemStatus
+from qrlib.QRUtils import display
 
 class DefaultComponent(QRComponent):
     
@@ -34,4 +37,19 @@ class DefaultComponent(QRComponent):
             raise e
 
 
+    def get_queue_items(self):
+        queue_test = QRQueue(name="test")
+        queue_items = queue_test.get_items()
+        return queue_items
 
+    def change_queue_items(self,queue_items):
+        for item in queue_items:
+            # display(item.id)
+            # display(item.input)
+            # display(item.status.value)
+
+            item.status=QueueItemStatus.ERROR
+            item.input = {"b":"b"}
+            item.output = {"c":"c"}
+            save_status = item.save()
+            display(save_status)
