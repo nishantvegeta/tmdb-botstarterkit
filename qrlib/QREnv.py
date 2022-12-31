@@ -4,7 +4,7 @@ import os
 class QREnv:
 
     # IDENTIFIER = BuiltIn().get_variable_value("${identifier}") # Get from env variable later
-    IDENTIFIER = "2cad8719-efae-4c26-a6e7-8bf6532ec796"
+    IDENTIFIER = "3926d8d3-0731-41d5-a156-17e26d9f8cfb"
     VERIFY_SSL = False
     TEST_SETUP_ONLY = False
     DEBUG = True
@@ -65,5 +65,10 @@ class QREnv:
     VAULT_NAMES = ['test','sdm']
 
     QUEUES = {}
-    STORAGES = {}
+    STORAGES = {''}
     VAULTS = {}
+
+    # * Storage Buckets
+    STORAGE_LOCAL = 'local'
+    STORAGE_S3 = 's3'
+    DEFAULT_STORAGE_LOCATION = os.path.join(os.getcwd(), 'downloads')
