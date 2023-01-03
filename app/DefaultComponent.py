@@ -10,7 +10,6 @@ class DefaultComponent(QRComponent):
     def __init__(self, process):
         super().__init__(process)
 
-
     def login(self):
         try:
             self.run_item.logger.info("Logging in...")
@@ -18,7 +17,7 @@ class DefaultComponent(QRComponent):
             self.run_item.logger.error("Failed to login")
             self.run_item.notification.data = {"reason": "Login failed"}
             raise e
-
+            
     def logout(self):
         try:
             self.run_item.logger.info("Logging out...")

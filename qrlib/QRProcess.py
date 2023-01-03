@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from QRObserver import QRPublisher
+from qrlib.QRObserver import QRPublisher
 from qrlib.QRRunItem import QRRunItem
 
 class QRProcess(ABC, QRPublisher):

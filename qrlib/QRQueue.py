@@ -1,6 +1,6 @@
-from QRQueueItem import QRQueueItem
+from qrlib.QRQueueItem import QRQueueItem
 from typing import List
-from QREnv import QREnv
+from qrlib.QREnv import QREnv
 from robot.libraries.BuiltIn import BuiltIn
 
 

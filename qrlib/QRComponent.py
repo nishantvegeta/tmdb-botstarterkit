@@ -1,5 +1,4 @@
-from QRObserver import QRSubscriber
-from qrlib.QRObserver import QRPublisher
+from qrlib.QRObserver import QRSubscriber, QRPublisher
 from qrlib.QRRunItem import QRRunItem
 
 class QRComponent(QRSubscriber):

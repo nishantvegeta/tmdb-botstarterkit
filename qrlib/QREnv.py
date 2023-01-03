@@ -1,6 +1,7 @@
 from robot.libraries.BuiltIn import BuiltIn
 import os
 
+
 class QREnv:
 
     # IDENTIFIER = BuiltIn().get_variable_value("${identifier}") # Get from env variable later
@@ -8,7 +9,7 @@ class QREnv:
     VERIFY_SSL = False
     TEST_SETUP_ONLY = False
     DEBUG = True
-    NO_PLATFORM = False
+    NO_PLATFORM = True
     PLATFORM_VERSION = 1
 
     BASE_DIR = os.environ.get("ROBOT_ROOT")
@@ -52,18 +53,18 @@ class QREnv:
     SMTP_USE_TLS = True
     SMTP_VERIFY_SSL = False
 
-
     BOT_NAME = 'TEST'
     HEADLESS = False
     SELENIUM_SPEED = None
     TIMEOUT = 30
     CONSECUTIVE_ERROR_RETRY = 3
 
-    
     QUEUE_NAMES = ['test']
     STORAGE_NAMES = ['test']
-    VAULT_NAMES = ['test','sdm']
+    VAULT_NAMES = ['test', 'test1']
 
     QUEUES = {}
     STORAGES = {}
     VAULTS = {}
+
+

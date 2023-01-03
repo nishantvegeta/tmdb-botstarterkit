@@ -1,4 +1,4 @@
-from QRRunItem import QRRunItem
+from qrlib.QRRunItem import QRRunItem
 
 def run_item_tt(post_success=True, post_error=True):
     def decorator(function):

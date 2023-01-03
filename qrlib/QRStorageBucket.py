@@ -1,4 +1,4 @@
-from QREnv import QREnv
+from qrlib.QREnv import QREnv
 
 class QRStorageBucket:
 
