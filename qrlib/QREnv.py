@@ -68,7 +68,7 @@ class QREnv:
     STORAGES = {''}
     VAULTS = {}
 
-    # * Storage Buckets
+    # * Storage Buckets, Do not change this settings
     STORAGE_LOCAL = 'local'
     STORAGE_S3 = 's3'
     DEFAULT_STORAGE_LOCATION = os.path.join(os.getcwd(), 'downloads')

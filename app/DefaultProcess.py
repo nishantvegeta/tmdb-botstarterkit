@@ -3,7 +3,7 @@ from qrlib.QRDecorators import run_item_tt, run_item_tf
 from qrlib.QRStorageBucket import QRStorageBucket
 from DefaultComponent import DefaultComponent
 from RPA.Browser.Selenium import Selenium
-
+from qrlib import QRUtils
 
 class DefaultProcess(QRProcess):
     
@@ -32,20 +32,15 @@ class DefaultProcess(QRProcess):
         # queue_items = self.default_component.get_queue_items()
         # self.default_component.change_queue_items(queue_items)
         # self.data = ["a","b"]
-        bucket = QRStorageBucket(bucket_type='S3')
-        bucket_info = bucket.get_working_bucket_info(bucket_name='testing-buckets-29')
-        if bucket_info:
-            bucket_info = bucket_info[0]
-            bucket.set_working_bucket_id = bucket_info['id']
-            bucket.get_files_list()
-        # url = "https://testing-buckets-29.s3.us-east-2.amazonaws.com/hello.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZNI2MI2SQKXK6KKZ%2F20221231%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20221231T091644Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=def54f00949cc797bcdb6527a9901bea930b871b26ef25639134bd78fbafa162"
-        # url = "/media/1/storagebuckets/1/testing/1672135811_ca60b0e9-5eaf-41da-aff2-1349e603019e.png"
-        # bucket.get_file(
-        #     filename='bhuwan.png',
-        #     bucket_type='Local',
-        #     url=url
-        #     )
-        bucket.post_file("unknown-testing2.png", "C:/Users/user/Desktop/bots/QuickFox/quickrpa-backend-code/bot-starter-kit-v2.0/image_2022_12_31T07_01_32_323Z.png")
+        bucket = QRStorageBucket()
+        # QRUtils.display(bucket.list_all_buckets())
+        bucket.get_and_set_working_bucket_info(bucket_name='testing')
+        file_list = bucket.list_all_files()
+        QRUtils.display(file_list)
+        QRUtils.display(file_list[6])
+        download = bucket.download_file(file_item=file_list[5])
+        QRUtils.display(download)
+        # QRUtils.display(bucket.search_and_get_file(find_filename="bhuwna_.png_"))
 
     @run_item_tf()
     def after_run(self, *args, **kwargs):
