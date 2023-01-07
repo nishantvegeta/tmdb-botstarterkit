@@ -14,7 +14,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.fernet import Fernet
-from QREnv import QREnv
+from qrlib.QREnv import QREnv
 import base64
 import requests
 import json
@@ -151,9 +151,6 @@ class SyncCrypto(object):
         encrypted_in_bytes = encrypted.encode('utf-8')
         decrypted_value = self.f.decrypt(encrypted_in_bytes)
         return decrypted_value
-
-
-
 
 
 class CustomVault(object):

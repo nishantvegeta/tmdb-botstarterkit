@@ -5,7 +5,7 @@ import requests
 import urllib
 import QRUtils
 from urllib import request
-from QREnv import QREnv
+from qrlib.QREnv import QREnv
 from storage_buckets.storage_bucket_exceptions import (
         BaseUrlNotSetException,
         IdentifierNotSetException,
@@ -137,7 +137,7 @@ class QRStorageBucket:
         return found_bucket
 
     # * File Processing Methods
-    def download_file(self, file_item: dict, save_to=''):
+    def download_file(self, file_item: dict, save_to_folder=''):
         bucket_type = str(self.working_bucket_type).lower()
         file_url = file_item.get('file')
         
@@ -157,7 +157,7 @@ class QRStorageBucket:
             response.raise_for_status()
             extension = response.headers['Content-Type'].split('/')[-1]
             full_file_name = f"{filename}.{extension}"
-            filename = os.path.join(QREnv.DEFAULT_STORAGE_LOCATION, full_file_name) if not save_to else os.path.join(save_to, full_file_name)
+            filename = os.path.join(QREnv.DEFAULT_STORAGE_LOCATION, full_file_name) if not save_to_folder else os.path.join(save_to_folder, full_file_name)
             with open(filename, "wb") as file:
                 for chunk in response.iter_content(chunk_size=8192):
                     file.write(chunk)

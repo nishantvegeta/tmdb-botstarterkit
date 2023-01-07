@@ -1,8 +1,8 @@
-from QRLogger import QRLogger
-from QRQueue import QRQueue
-from QRQueueItem import QRQueueItem
-from QRRunItemNotification import QRRunItemNotification
-from QREnv import QREnv
+from qrlib.QRLogger import QRLogger
+from qrlib.QRQueue import QRQueue
+from qrlib.QRQueueItem import QRQueueItem
+from qrlib.QRRunItemNotification import QRRunItemNotification
+from qrlib.QREnv import QREnv
 import requests
 from robot.libraries.BuiltIn import BuiltIn
 import traceback
