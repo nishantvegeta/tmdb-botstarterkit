@@ -1,14 +1,15 @@
 from robot.libraries.BuiltIn import BuiltIn
 import os
 
+
 class QREnv:
 
     # IDENTIFIER = BuiltIn().get_variable_value("${identifier}") # Get from env variable later
-    IDENTIFIER = "2cad8719-efae-4c26-a6e7-8bf6532ec796"
+    IDENTIFIER = "3926d8d3-0731-41d5-a156-17e26d9f8cfb"
     VERIFY_SSL = False
     TEST_SETUP_ONLY = False
     DEBUG = True
-    NO_PLATFORM = False
+    NO_PLATFORM = True
     PLATFORM_VERSION = 1
 
     BASE_DIR = os.environ.get("ROBOT_ROOT")
@@ -52,18 +53,21 @@ class QREnv:
     SMTP_USE_TLS = True
     SMTP_VERIFY_SSL = False
 
-
     BOT_NAME = 'TEST'
     HEADLESS = False
     SELENIUM_SPEED = None
     TIMEOUT = 30
     CONSECUTIVE_ERROR_RETRY = 3
 
-    
     QUEUE_NAMES = ['test']
     STORAGE_NAMES = ['test']
-    VAULT_NAMES = ['test','sdm']
+    VAULT_NAMES = ['test', 'test1']
 
     QUEUES = {}
-    STORAGES = {}
+    STORAGES = {''}
     VAULTS = {}
+
+    # * Storage Buckets, Do not change this settings
+    STORAGE_LOCAL = 'local'
+    STORAGE_S3 = 's3'
+    DEFAULT_STORAGE_LOCATION = os.path.join(BASE_DIR, 'storage_downloads')

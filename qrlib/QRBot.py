@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
-from QRObserver import QRPublisher
-from QREnv import QREnv
-from QRDecorators import run_item_tf
-from QRQueue import QRQueue
-from QRStorageBucket import QRStorageBucket
+from qrlib.QRObserver import QRPublisher
+from qrlib.QREnv import QREnv
+from qrlib.QRDecorators import run_item_tf
+from qrlib.QRQueue import QRQueue
+from qrlib.QRStorageBucket import QRStorageBucket
 from qrlib.QRRunItem import QRRunItem
-import QRUtils
+import qrlib.QRUtils
+
 
 class QRBot(ABC, QRPublisher):
 

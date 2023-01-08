@@ -1,7 +1,7 @@
 import urllib
-from QRQueueItem import QRQueueItem
+from qrlib.QRQueueItem import QRQueueItem
 from typing import List
-from QREnv import QREnv
+from qrlib.QREnv import QREnv
 from robot.libraries.BuiltIn import BuiltIn
 import requests
 
@@ -47,6 +47,7 @@ class QRQueue:
             "Accept":"application/json",
             "Authorization":f"identifier {identifier}"
         }
+    
     def get_items(self, count: int = 1, order: str = "asc",seek_local=False) -> List[QRQueueItem]:
         if(QREnv.NO_PLATFORM):
             #Read from sample file

@@ -1,8 +1,8 @@
 from robot.libraries.BuiltIn import BuiltIn
 from RPA.Browser.Selenium import Selenium
 from RPA.Robocorp.Vault import Vault
-from QRVault import QRVault, CustomVault
-from QREnv import QREnv
+from qrlib.QRVault import QRVault, CustomVault
+from qrlib.QREnv import QREnv
 
 
 def ltc(message: str) -> None:
