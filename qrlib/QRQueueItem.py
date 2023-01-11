@@ -1,7 +1,6 @@
 import urllib
 import requests
 from enum import Enum
-import pydantic
 from qrlib.QREnv import QREnv
 from qrlib.queue.queue_exceptions import BaseUrlNotSetException, IdentifierNotSetException, PatchRequestFailedException
 
@@ -9,35 +8,29 @@ class QueueItemStatus(Enum):
         COMPLETED = "Completed"
         ERROR = "Error"
         NEW = "New"
-        PROCESSING = "Processing"
-        ARCHIVED = "Archived"
-
-
-        @property
-        def transitions(cls):
-            TRANSITIONS = {
-                cls.NEW: [cls.NEW, cls.ARCHIVED, cls.PROCESSING],
-                cls.PROCESSING: [cls.PROCESSING,cls.PROCESSING,cls.ARCHIVED,cls.NEW,cls.ERROR,cls.COMPLETED],
-                cls.COMPLETED: [cls.COMPLETED],
-                cls.ERROR: [cls.NEW],
-                cls.ARCHIVED: [cls.ARCHIVED],
-            }
-            return TRANSITIONS
 
         @property
         def choices(cls):
             return [i.value for i in cls]
 
          
-class QRQueueItem(pydantic.BaseModel):
-    id : int
-    status:QueueItemStatus
-    input: dict
-    output: dict = {}
-    queue:int
+class QRQueueItem():
+    def __init__(self,id:int,status:QueueItemStatus,input:dict,queue:int,output:dict={}) -> None:
+       self.id = id
+       self.status = status
+       self.input = input
+       self.output = output
+       self.queue = queue
 
-    class Config:  
-        use_enum_values = True
+    def dict(self):
+        dict_data = {}
+        for key, value in self.__dict__.items():
+            if isinstance(value, Enum):
+                dict_data[key] = value.value
+            else:
+                dict_data[key] = value
+        #
+        return dict_data
 
     def set_error(self) -> None:
         self.status = QueueItemStatus.ERROR
@@ -69,13 +62,13 @@ class QRQueueItem(pydantic.BaseModel):
             "Authorization":f"identifier {identifier}"
         }
 
-    def save(self):
+    def post(self):
         json_data = self.dict()
         
         response = requests.patch(
-        url = self.gen_uri(),
-        json=json_data,
-        headers=self.gen_headers()
+            url=self.gen_uri(),
+            json=json_data,
+            headers=self.gen_headers()
         )
         if response.status_code == 200:
             return response.json()
