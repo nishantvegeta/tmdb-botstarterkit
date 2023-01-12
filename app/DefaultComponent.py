@@ -4,9 +4,6 @@ from qrlib.QRComponent import QRComponent
 from qrlib.QRRunItem import QRRunItem
 from qrlib.QREnv import QREnv
 
-from qrlib.QRQueue import QRQueue
-from qrlib.QRQueueItem import QueueItemStatus
-from qrlib.QRUtils import display
 
 class DefaultComponent(QRComponent):
     

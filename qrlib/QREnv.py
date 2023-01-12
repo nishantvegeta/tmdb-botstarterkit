@@ -59,7 +59,7 @@ class QREnv:
     TIMEOUT = 30
     CONSECUTIVE_ERROR_RETRY = 3
 
-    QUEUE_NAMES = ['Dixit Queue']
+    QUEUE_NAMES = []
     STORAGE_NAMES = []
     VAULT_NAMES = []
 

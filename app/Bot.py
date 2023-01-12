@@ -2,9 +2,6 @@ from qrlib.QRBot import QRBot
 from robot.libraries.BuiltIn import BuiltIn
 from DefaultProcess import DefaultProcess
 from qrlib.QREnv import QREnv
-from qrlib.QRQueue import QRQueue
-# del
-from qrlib.QRUtils import display
 
 class Bot(QRBot):
 
