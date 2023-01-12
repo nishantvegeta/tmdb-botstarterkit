@@ -1,4 +1,3 @@
-import urllib
 import requests
 from enum import Enum
 from qrlib.QREnv import QREnv
@@ -15,7 +14,7 @@ class QueueItemStatus(Enum):
 
          
 class QRQueueItem():
-    def __init__(self,id:int,status:QueueItemStatus,input:dict,queue:int,output:dict={}) -> None:
+    def __init__(self,id:int,status:QueueItemStatus,input:dict,queue:int,output:dict={},**kwargs) -> None:
        self.id = id
        self.status = status
        self.input = input
@@ -47,8 +46,8 @@ class QRQueueItem():
         else:
             raise BaseUrlNotSetException()
 
-        path = f"bot/queue/{self.queue}/data/{self.id}/"
-        uri = urllib.parse.urljoin(base_url, path)
+        path = f"/bot/queue/{self.queue}/data/{self.id}/"
+        uri = uri = f"{base_url}{path}"
         return uri
 
     @staticmethod

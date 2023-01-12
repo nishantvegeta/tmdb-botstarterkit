@@ -46,11 +46,4 @@ class DefaultProcess(QRProcess):
         self.run_item.logger.info(f"In post run item = {args[0]}")
 
     def run(self):
-        
-        for item in self.data:
-            # BuiltIn().run_keyword("DefaultProcess.Before Run Item", item)
-            # BuiltIn().run_keyword("DefaultProcess.Execute Run Item", item)
-            # BuiltIn().run_keyword("DefaultProcess.After Run Item", item)
-            self.before_run_item(item)
-            self.execute_run_item(item)
-            self.after_run_item(item)
+        self.before_run()
