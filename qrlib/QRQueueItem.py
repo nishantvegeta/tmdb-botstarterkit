@@ -6,6 +6,7 @@ from qrlib.queue.queue_exceptions import BaseUrlNotSetException, IdentifierNotSe
 class QueueItemStatus(Enum):
         COMPLETED = "Completed"
         ERROR = "Error"
+        PROCESSING = "Processing"
         NEW = "New"
 
         @property
@@ -14,7 +15,7 @@ class QueueItemStatus(Enum):
 
          
 class QRQueueItem():
-    def __init__(self,id:int,status:QueueItemStatus,input:dict,queue:int,output:dict={},**kwargs) -> None:
+    def __init__(self,status:QueueItemStatus,input:dict,queue:int,output:dict={},id:int=None,**kwargs) -> None:
        self.id = id
        self.status = status
        self.input = input

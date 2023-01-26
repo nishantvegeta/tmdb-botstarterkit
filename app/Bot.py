@@ -15,5 +15,4 @@ class Bot(QRBot):
         self.dp.run()
 
     def teardown(self):
-        return
         self.dp.after_run()

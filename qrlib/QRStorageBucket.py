@@ -1,10 +1,7 @@
 import re
 import os
-import json
 import requests
 import urllib
-import QRUtils
-import traceback
 
 from qrlib.QREnv import QREnv
 from storage_buckets.storage_bucket_exceptions import (
@@ -71,7 +68,7 @@ class QRStorageBucket:
         param type: bucket_data, generate uri for working bucket data
         """
         base_url = self._base_url()
-        path = f"bot/storagebuckets/"
+        path = f"/bot/storagebuckets/"
 
         if type == 'bucket_data':
             # * base url for bucket data
@@ -80,13 +77,13 @@ class QRStorageBucket:
                 raise BucketIdNotSetException
             path = f"{path}{bucket_id}/bucket_data/"
 
-        uri = urllib.parse.urljoin(base_url, path)
+        uri = f"{base_url}{path}"
         return uri
         
     def _gen_file_download_link(self, file_url):
         """Implemented for local storage for file downloads"""
         base_url = self._base_url()
-        uri = urllib.parse.urljoin(base_url, file_url)
+        uri = f"{base_url}{file_url}"
         return uri
     
     # * Bucket Processing Methods
