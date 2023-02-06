@@ -1,5 +1,6 @@
 from qrlib.QRProcess import QRProcess
 from qrlib.QRDecorators import run_item_tt, run_item_tf
+from qrlib.QRStorageBucket import QRStorageBucket
 from DefaultComponent import DefaultComponent
 from RPA.Browser.Selenium import Selenium
 from robot.libraries.BuiltIn import BuiltIn
@@ -10,6 +11,15 @@ class DefaultProcess(QRProcess):
 
     def __init__(self):
         super().__init__()
+        """
+        _subscriber=set
+        def register
+        def unregister
+        def notify
+        #
+        run_item
+        """
+
         self.default_component = DefaultComponent(self)
         self.data = []
 
@@ -36,15 +46,4 @@ class DefaultProcess(QRProcess):
         self.run_item.logger.info(f"In post run item = {args[0]}")
 
     def run(self):
-        
-        for item in self.data:
-            # BuiltIn().run_keyword("DefaultProcess.Before Run Item", item)
-            # BuiltIn().run_keyword("DefaultProcess.Execute Run Item", item)
-            # BuiltIn().run_keyword("DefaultProcess.After Run Item", item)
-            self.before_run_item(item)
-            self.execute_run_item(item)
-            self.after_run_item(item)
-
-
-
-
+        self.before_run()

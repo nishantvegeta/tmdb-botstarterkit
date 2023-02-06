@@ -27,7 +27,7 @@ class QRBot(ABC, QRPublisher):
     def setup_platform_components(self, *args, **kwargs):
         for vault_name in QREnv.VAULT_NAMES:
             try:
-                QREnv.VAULTS[vault_name] = QRUtils.get_secret(vault_name)
+                QREnv.VAULTS[vault_name] = qrlib.QRUtils.get_secret(vault_name)
                 self.run_item.logger.info(f"Retrieved vault: {vault_name}")
             except Exception as e:
                 self.run_item.logger.error(f"Failed to retrieve vault: {vault_name}")

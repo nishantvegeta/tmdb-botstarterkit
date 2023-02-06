@@ -5,11 +5,11 @@ import os
 class QREnv:
 
     # IDENTIFIER = BuiltIn().get_variable_value("${identifier}") # Get from env variable later
-    IDENTIFIER = "d847ffb1-a803-4ede-ab57-f44776257b69"
+    IDENTIFIER = "f2a2e5ee-5fcf-47ac-9ab0-9870647a225f"
     VERIFY_SSL = False
     TEST_SETUP_ONLY = False
     DEBUG = True
-    NO_PLATFORM = True
+    NO_PLATFORM = False
     PLATFORM_VERSION = 1
 
     BASE_DIR = os.environ.get("ROBOT_ROOT")
@@ -23,10 +23,10 @@ class QREnv:
     ENV_PRODUCTION = "PRODUCTION"
 
     # URLS
-    URL_LOCAL = "http://localhost:8000/api/v1"
+    URL_LOCAL = "http://127.0.0.1:8000/api/v1"
     URL_QR_DEV_URL = "http://13.58.117.7:8000/api/v1"
     URL_QR_UAT_URL = "http://13.58.117.7:8000/api/v1"
-    URL_UAT_URL = ""
+    URL_UAT_URL = "http://18.217.209.236/api/v1"
     URL_PROD = ""
 
     ENV_URL = {
@@ -38,7 +38,7 @@ class QREnv:
     }
 
     # ENVIRONMENT = os.environ.get("ENVIRONMENT")
-    ENVIRONMENT = ENV_QR_UAT
+    ENVIRONMENT = ENV_UAT
     
     try:
         BASE_URL = ENV_URL[ENVIRONMENT]
@@ -59,12 +59,15 @@ class QREnv:
     TIMEOUT = 30
     CONSECUTIVE_ERROR_RETRY = 3
 
-    QUEUE_NAMES = ['test']
-    STORAGE_NAMES = ['test']
-    VAULT_NAMES = ['test', 'test1']
+    QUEUE_NAMES = []
+    STORAGE_NAMES = []
+    VAULT_NAMES = []
 
     QUEUES = {}
-    STORAGES = {}
+    STORAGES = {''}
     VAULTS = {}
 
-
+    # * Storage Buckets, Do not change this settings
+    STORAGE_LOCAL = 'local'
+    STORAGE_S3 = 's3'
+    DEFAULT_STORAGE_LOCATION = os.path.join(BASE_DIR, 'storage_downloads')

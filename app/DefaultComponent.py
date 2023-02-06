@@ -31,6 +31,3 @@ class DefaultComponent(QRComponent):
         except Exception as e:
             self.run_item.logger.error("Test task failed")
             raise e
-
-
-
