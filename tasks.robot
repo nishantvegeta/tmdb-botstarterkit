@@ -7,5 +7,4 @@ Task Teardown     Teardown
 
 *** Tasks ***
 RPA Task
-    Setup Platform Components
     Start

@@ -9,7 +9,7 @@ class QREnv:
     VERIFY_SSL = False
     TEST_SETUP_ONLY = False
     DEBUG = True
-    NO_PLATFORM = False
+    NO_PLATFORM = True
     PLATFORM_VERSION = 1
 
     BASE_DIR = os.environ.get("ROBOT_ROOT")

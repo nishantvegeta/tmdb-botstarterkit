@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 
+
 class QRSubscriber(ABC):
 
     @abstractmethod
-    def update(self, publisher) -> None:
+    def notify(self, publisher) -> None:
         pass
-        
+
 
 class QRPublisher:
 
@@ -20,4 +21,4 @@ class QRPublisher:
 
     def notify(self) -> None:
         for subscriber in self._subscribers:
-            subscriber.update(self)
+            subscriber.notify(self)

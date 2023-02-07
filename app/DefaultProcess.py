@@ -26,6 +26,7 @@ class DefaultProcess(QRProcess):
     @run_item_tt()
     def execute_run_item(self, *args, **kwargs):
         self.default_component.test()
+        self.run_item.report_data["test"] = args[0]
 
     @run_item_tf()
     def before_run(self, *args, **kwargs):
@@ -47,3 +48,5 @@ class DefaultProcess(QRProcess):
 
     def run(self):
         self.before_run()
+        for x in self.data:
+            self.execute_run_item(x)
