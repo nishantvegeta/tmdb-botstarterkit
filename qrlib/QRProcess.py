@@ -7,8 +7,7 @@ class QRProcess(ABC, QRPublisher):
     def __init__(self):
         for base_class in QRProcess.__bases__:
              base_class.__init__(self)
-        self.run_item: QRRunItem = None
-
+  
     @abstractmethod
     def before_run_item(self, *args, **kwargs):
         pass
@@ -26,9 +25,9 @@ class QRProcess(ABC, QRPublisher):
         pass
 
     @abstractmethod
-    def run(self):
+    def after_run(self, *args, **kwargs):
         pass
 
     @abstractmethod
-    def after_run(self, *args, **kwargs):
+    def execute_run(self):
         pass

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from qrlib.QRObserver import QRPublisher
 from qrlib.QREnv import QREnv
-from qrlib.QRDecorators import run_item_tf
+from qrlib.QRDecorators import run_item
 from qrlib.QRQueue import QRQueue
 from qrlib.QRStorageBucket import QRStorageBucket
 from qrlib.QRRunItem import QRRunItem
@@ -23,7 +23,7 @@ class QRBot(ABC, QRPublisher):
     def teardown(self):
         pass
 
-    @run_item_tf()
+    @run_item(is_ticket=False, post_error=False)
     def setup_platform_components(self, *args, **kwargs):
         for vault_name in QREnv.VAULT_NAMES:
             try:

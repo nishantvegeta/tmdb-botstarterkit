@@ -20,11 +20,11 @@ def get_secret(name):
     if (QREnv.NO_PLATFORM):
         secret = Vault().get_secret(name)
     else:
-        if(QREnv.PLATFORM_VERSION == 1):
-            secret = CustomVault(identifier=QREnv.IDENTIFIER, URL=QREnv.BASE_URL).get_vault(name)
-            print(secret['username'])
-        else:
-            secret = QRVault().get_secret(name)
+        secret = CustomVault(identifier=QREnv.IDENTIFIER, URL=QREnv.BASE_URL).get_vault(name)
+        # if(QREnv.PLATFORM_VERSION == 1):
+        #     secret = CustomVault(identifier=QREnv.IDENTIFIER, URL=QREnv.BASE_URL).get_vault(name)
+        # else:
+        #     secret = QRVault().get_secret(name)
     if (not secret):
         raise Exception("Failed to load vault credentials")
     return secret

@@ -10,7 +10,7 @@ class Bot(QRBot):
     def start(self):
         self.setup_platform_components()
         self.dp.before_run()
-        self.dp.run()
+        self.dp.execute_run()
 
     def teardown(self):
         self.dp.after_run()

@@ -4,16 +4,21 @@ import os
 
 class QREnv:
 
-    # IDENTIFIER = BuiltIn().get_variable_value("${identifier}") # Get from env variable later
-    IDENTIFIER = "f2a2e5ee-5fcf-47ac-9ab0-9870647a225f"
-    VERIFY_SSL = False
-    TEST_SETUP_ONLY = False
-    DEBUG = True
+    
+    PLATFORM_VERSION = 2
+    
     NO_PLATFORM = True
-    PLATFORM_VERSION = 1
-
+    
+    # IDENTIFIER = BuiltIn().get_variable_value("${identifier}")        # For platform v1
+    # IDENTIFIER = os.environ.get("identifier")                         # For platform v2
+    IDENTIFIER = "f2a2e5ee-5fcf-47ac-9ab0-9870647a225f"                 # For testing on server via localhost
+    
+    VERIFY_SSL = False
+    DEBUG = True
+    
     BASE_DIR = os.environ.get("ROBOT_ROOT")
     ARTIFACT_DIR = os.environ.get("ROBOT_ARTIFACTS")
+    DEFAULT_STORAGE_LOCATION = os.path.join(BASE_DIR, 'storage_downloads')
 
     # ENVIRONMENTS
     ENV_LOCAL = "LOCAL"
@@ -45,29 +50,12 @@ class QREnv:
     except Exception as e:
         BASE_URL = URL_LOCAL
 
-    # SMTP Settings
-    SMTP_SERVER = ""
-    SMTP_PORT = ""
-    SMTP_ACCOUNT = ""
-    SMTP_PASSWORD = ""
-    SMTP_USE_TLS = True
-    SMTP_VERIFY_SSL = False
-
-    BOT_NAME = 'TEST'
-    HEADLESS = False
-    SELENIUM_SPEED = None
-    TIMEOUT = 30
-    CONSECUTIVE_ERROR_RETRY = 3
 
     QUEUE_NAMES = []
     STORAGE_NAMES = []
     VAULT_NAMES = []
 
     QUEUES = {}
-    STORAGES = {''}
+    STORAGES = {}
     VAULTS = {}
-
-    # * Storage Buckets, Do not change this settings
-    STORAGE_LOCAL = 'local'
-    STORAGE_S3 = 's3'
-    DEFAULT_STORAGE_LOCATION = os.path.join(BASE_DIR, 'storage_downloads')
+    

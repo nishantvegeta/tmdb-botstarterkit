@@ -17,6 +17,10 @@ from storage_buckets.storage_bucket_exceptions import (
 
 
 class QRStorageBucket:
+
+    STORAGE_LOCAL = 'local'
+    STORAGE_S3 = 's3'
+
     def __init__(self, working_bucket):
         self._working_bucket_type = self._working_bucket_id = None
         self._working_bucket = working_bucket
@@ -123,10 +127,10 @@ class QRStorageBucket:
 
         filename = filename[1] if not filename[0] else filename[0]
         
-        if bucket_type == QREnv.STORAGE_LOCAL:
+        if bucket_type == self.STORAGE_LOCAL:
             download_link = self._gen_file_download_link(file_url=file_url)
 
-        elif bucket_type == QREnv.STORAGE_S3:
+        elif bucket_type == self.STORAGE_S3:
             download_link = file_url
 
         try:

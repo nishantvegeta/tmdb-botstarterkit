@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class QRSubscriber(ABC):
 
     @abstractmethod
-    def notify(self, publisher) -> None:
+    def notify(self, message) -> None:
         pass
 
 
@@ -19,6 +19,6 @@ class QRPublisher:
     def unregister(self, subscriber: QRSubscriber) -> None:
         self._subscribers.discard(subscriber)
 
-    def notify(self) -> None:
+    def notify(self, message) -> None:
         for subscriber in self._subscribers:
-            subscriber.notify(self)
+            subscriber.notify(message)
