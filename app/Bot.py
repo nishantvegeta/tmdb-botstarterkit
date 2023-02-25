@@ -5,12 +5,12 @@ class Bot(QRBot):
 
     def __init__(self):
         super().__init__()
-        self.dp = DefaultProcess()
+        self.process = DefaultProcess()
 
     def start(self):
         self.setup_platform_components()
-        self.dp.before_run()
-        self.dp.execute_run()
+        self.process.before_run()
+        self.process.execute_run()
 
     def teardown(self):
-        self.dp.after_run()
+        self.process.after_run()
