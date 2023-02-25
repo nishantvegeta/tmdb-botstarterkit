@@ -1,10 +1,6 @@
 {
     "test":{
-        "username":"hi",
-        "password":"bye"
-    },
-    "test1":{
-        "username":"hello",
-        "password":"mello"
+        "username":"test_user",
+        "password":"test_password"
     }
 }
