@@ -1,8 +1,4 @@
-from robot.libraries.BuiltIn import BuiltIn
-from RPA.Browser.Selenium import Selenium
 from qrlib.QRComponent import QRComponent
-from qrlib.QRRunItem import QRRunItem
-from qrlib.QREnv import QREnv
 
 
 class DefaultComponent(QRComponent):

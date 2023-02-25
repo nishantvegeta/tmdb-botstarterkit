@@ -22,7 +22,7 @@ class QRBot(ABC, QRPublisher):
     def teardown(self):
         pass
 
-    @run_item(is_ticket=False, post_error=False)
+    @run_item(is_ticket=False, post_success=False)
     def setup_platform_components(self, *args, **kwargs):
         run_item: QRRunItem = kwargs['run_item']
         for vault_name in QREnv.VAULT_NAMES:
