@@ -9,8 +9,9 @@ class QRQueue:
     def __init__(self, name: str) -> None:
         self.name = name
         self.id = None
+        self.get_queue_info()
         
-    def get_info(self):
+    def get_queue_info(self):
         if(QREnv.NO_PLATFORM):
             return {"id":0,"name":"Test Queue"}
         else:
@@ -32,7 +33,7 @@ class QRQueue:
                 setattr(self,'name',name)
             else:
                 raise Exception(response.text)
-            return self
+            return response.json()
 
     @staticmethod        
     def gen_uri(params:dict=None):
@@ -74,8 +75,7 @@ class QRQueue:
             )
             if response.status_code == 200:
                 queue_data = response.json()
-               
-                #    
+                 
                 id = queue_data.get("id")
                 name = queue_data.get('name')
                 queue_items = queue_data.get('queue_items')
@@ -93,7 +93,6 @@ class QRQueue:
         if(QREnv.NO_PLATFORM):
             return True
         else:
-            self.get_info()
             if not self.id and not self.name:
                 raise Exception("queue id and name not set")
             new_items = []

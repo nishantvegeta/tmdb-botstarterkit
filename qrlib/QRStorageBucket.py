@@ -22,10 +22,11 @@ class QRStorageBucket:
     STORAGE_S3 = 's3'
 
     def __init__(self, working_bucket):
-        self._working_bucket_type = self._working_bucket_id = None
+        self._working_bucket_type = None
+        self._working_bucket_id = None
         self._working_bucket = working_bucket
         self._create_download_location()
-        self._fetch_bucket_info()
+        self.get_bucket_info()
 
     @property
     def working_bucket(self):
@@ -41,10 +42,7 @@ class QRStorageBucket:
 
     def _create_download_location(self):
         location = QREnv.DEFAULT_STORAGE_LOCATION
-        try:
-            os.makedirs(location, exist_ok=True)
-        except OSError as e:
-            raise e
+        os.makedirs(location, exist_ok=True)
 
     # * URI Generation Methods
     @staticmethod
@@ -91,7 +89,10 @@ class QRStorageBucket:
         return uri
     
     # * Bucket Processing Methods
-    def _fetch_bucket_info(self):
+    def get_bucket_info(self):
+        if(QREnv.NO_PLATFORM):
+            return {"id":0,"name":"Test Bucket"}
+        
         if self.working_bucket:
             current_working_bucket = self.working_bucket
         else:

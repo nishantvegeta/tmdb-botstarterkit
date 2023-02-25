@@ -36,23 +36,19 @@ class QRBot(ABC, QRPublisher):
 
         for queue_name in QREnv.QUEUE_NAMES:
             try:
-                queue = QRQueue(queue_name)
-                queue.get_info()
-                QREnv.QUEUES[queue_name] = queue
-                run_item.logger.info(f"Retrieved queue info: {queue_name}")
+                QRQueue(queue_name)
+                run_item.logger.info(f"Queue accessibility checked: {queue_name}")
             except Exception as e:
-                run_item.logger.error(f"Failed to retrieve queue info: {queue_name}")
-                run_item.notification.set(subject=f"Warning! {QREnv.BOT_NAME} bot has stopped unexpectedly", data={"reason":f"Failed to retrieve queue info: {queue_name}"})
+                run_item.logger.error(f"Queue not accessible: {queue_name}")
+                run_item.notification.set(subject=f"Warning! {QREnv.BOT_NAME} bot has stopped unexpectedly", data={"reason":f"Queue not accessible: {queue_name}"})
                 raise e
 
         for storage_name in QREnv.STORAGE_NAMES:
             try:
-                storage = QRStorageBucket(storage_name)
-                storage.get_info()
-                QREnv.STORAGES[storage_name] = storage
-                run_item.logger.info(f"Retrieved storage info: {storage_name}")
+                QRStorageBucket(storage_name)
+                run_item.logger.info(f"Storage bucket accessibility checked: {storage_name}")
             except Exception as e:
-                run_item.logger.error(f"Failed to retrieve storage info: {storage_name}")
-                run_item.notification.set(subject=f"Warning! {QREnv.BOT_NAME} bot has stopped unexpectedly", data={"reason":f"Failed to retrieve storage info: {storage_name}"})
+                run_item.logger.error(f"Storage bucket not accessible:  {storage_name}")
+                run_item.notification.set(subject=f"Warning! {QREnv.BOT_NAME} bot has stopped unexpectedly", data={"reason":f"Storage bucket not accessible: {storage_name}"})
                 raise e
 
