@@ -8,7 +8,7 @@ class DefaultComponent(QRComponent):
 
     def login(self):
         try:
-            self.run_item.logger.info("Logging in...")
+            self.logger.info("Logging in...")
         except Exception as e:
             self.run_item.logger.error("Failed to login")
             self.run_item.notification.data = {"reason": "Login failed"}
@@ -16,14 +16,14 @@ class DefaultComponent(QRComponent):
             
     def logout(self):
         try:
-            self.run_item.logger.info("Logging out...")
+            self.logger.info("Logging out...")
         except Exception as e:
-            self.run_item.logger.error("Failed to logout")
+            self.logger.error("Failed to logout")
             raise e
 
     def test(self):
         try:
-            self.run_item.logger.info("Test task")
+            self.logger.info("Test task")
         except Exception as e:
-            self.run_item.logger.error("Test task failed")
+            self.logger.error("Test task failed")
             raise e
