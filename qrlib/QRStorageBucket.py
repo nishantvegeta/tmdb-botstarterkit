@@ -2,7 +2,9 @@ import re
 import os
 import requests
 import urllib
+import time
 
+from qrlib.QRUtils import get_secret
 from qrlib.QREnv import QREnv
 from storage_buckets.storage_bucket_exceptions import (
         BaseUrlNotSetException,
@@ -114,14 +116,40 @@ class QRStorageBucket:
             self._working_bucket_type = found_bucket[0]['bucket_type']
         else:
             raise BucketDoesNotExist
-
         return found_bucket
+
+    def portal_login(self):
+        vault_value = get_secret('System')
+        email = vault_value['email']
+        password = vault_value['password']
+        base_url = self._base_url()
+        url = base_url+"/token/"
+
+        data = {
+            'email': email,
+            'password': password
+        }
+
+        headers = {
+            'Accept': 'application/json',  
+        }
+
+        try:
+            with requests.post(url, json=data, headers=headers) as response:
+                if response.status_code == 200:
+                    json_response = response.json()
+                    return json_response['access']
+                else:
+                    print(f"Error:")
+        except requests.exceptions.HTTPError as err:
+            print(f"HTTP Error: {err}")
+        except Exception as e:
+            print(f"Error: {e}")
 
     # * File Processing Methods
     def download_file(self, file_item: dict, save_to_folder=''):
         bucket_type = str(self.working_bucket_type).lower()
         file_url = file_item.get('file')
-        
         filename_str = str(file_item.get('file_display_name'))
         regex_filename = re.findall(r"(([^/]+/)*)([\w._]+)+", string=filename_str)[0]
         filename = str(regex_filename[2]).split(".")
@@ -129,17 +157,29 @@ class QRStorageBucket:
         filename = filename[1] if not filename[0] else filename[0]
         
         if bucket_type == self.STORAGE_LOCAL:
-            download_link = self._gen_file_download_link(file_url=file_url)
-
+            # download_link = self._gen_file_download_link(file_url=file_url)
+            download_link = file_url
+            token = self.portal_login()
+            headers = {
+                "Authorization": f"Bearer {token}"
+            }
+           
         elif bucket_type == self.STORAGE_S3:
             download_link = file_url
-
+        
         try:
-            with requests.get(download_link) as response:
+            with requests.get(download_link, headers=headers) as response:
                 response.raise_for_status()
-                extension = response.headers['Content-Type'].split('/')[-1]
+                # content_type = response.headers.get('Content-Type', '')
+                # extension = content_type.split('/')[-1]
+                extension = file_url.split('.')[-1]
 
+                # Set the correct file name including the extension
                 full_file_name = f"{filename}.{extension}"
+
+                # Explicitly set the Content-Disposition header
+                response.headers['Content-Disposition'] = f'attachment; filename="{full_file_name}"'
+
                 file_path = os.path.join(QREnv.DEFAULT_STORAGE_LOCATION, full_file_name) if not save_to_folder else os.path.join(save_to_folder, full_file_name)
 
                 with open(file_path, "wb") as file:
