@@ -68,7 +68,6 @@ class QRVault:
         else:
             self.logger.info(resp.text)
             raise Exception(f"Vault retrieve error: Received status code of {resp.status_code}")
-
     @staticmethod
     def robot_generate_pub_priv_keys() -> bytes:
         """GENEWRATES PEM FORMAT PUBLIC,PRIVATE KEY """

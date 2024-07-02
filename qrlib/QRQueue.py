@@ -1,6 +1,10 @@
 from qrlib.QRQueueItem import QRQueueItem, QueueItemStatus
+from qrlib.QRRunItem import QRRunItem
 from typing import List
 from qrlib.QREnv import QREnv
+from qrlib.QRLogger import logging
+from qrlib.QRUtils import get_secret
+
 import requests
 from qrlib.queue.queue_exceptions import BaseUrlNotSetException, IdentifierNotSetException
 
@@ -34,6 +38,14 @@ class QRQueue:
             else:
                 raise Exception(response.text)
             return response.json()
+    
+    # @staticmethod
+    # def _base_url():
+    #     if hasattr(QREnv, 'BASE_URL'):
+    #         base_url = QREnv.BASE_URL
+    #         return base_url
+    #     else:
+    #         raise BaseUrlNotSetException
 
     @staticmethod        
     def gen_uri(params:dict=None):
@@ -62,15 +74,49 @@ class QRQueue:
             "Authorization":f"identifier {identifier}"
         }
 
+    def portal_login(self):
+        vault_value = get_secret('System')
+        email = vault_value['email']
+        password = vault_value['password']
+        base_url = self.gen_uri()
+        url = base_url+"/token/"
+
+        data = {
+            'email': email,
+            'password': password
+        }
+
+        headers = {
+            'Accept': 'application/json',  
+        }
+
+        try:
+            with requests.post(url, json=data, headers=headers) as response:
+                if response.status_code == 200:
+                    json_response = response.json()
+                    return json_response['access']
+                else:
+                    print(f"Error:")
+        except requests.exceptions.HTTPError as err:
+            print(f"HTTP Error: {err}")
+        except Exception as e:
+            print(f"Error: {e}")
+
     def get_items(self, count: int = 1, order: str = "asc") -> List[QRQueueItem]:
+        run_item = QRRunItem()
         if(QREnv.NO_PLATFORM):
             #Read from sample file
             return [QRQueueItem(id=0,status="New",queue=0,input={"key":"Test"}),QRQueueItem(id=2,status="New",queue=0,input={"key":"Test1"})]
         else:
             # Hit api to get items. Create queueitems with the response
+            token = self.portal_login()
+            run_item.logger.info("token is -->", token)
             response = requests.get(
             url = self.gen_uri(),
-            headers=self.gen_headers(),
+            # headers=self.gen_headers(),
+            headers = {
+                "Authorization": f"Bearer {token}"
+            },
             params={"name":f"{self.name}", "item_size":count}
             )
             if response.status_code == 200:

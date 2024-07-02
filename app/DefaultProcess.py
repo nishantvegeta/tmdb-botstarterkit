@@ -1,8 +1,8 @@
+import time
 from qrlib.QRProcess import QRProcess
 from qrlib.QRDecorators import run_item
 from qrlib.QRRunItem import QRRunItem
 from DefaultComponent import DefaultComponent
-
 
 class DefaultProcess(QRProcess):
 
@@ -17,7 +17,6 @@ class DefaultProcess(QRProcess):
         # Get run item created by decorator. Then notify to all components about new run item.
         run_item: QRRunItem = kwargs["run_item"]
         self.notify(run_item)
-
         self.default_component.login()
         self.data = ["a", "b"]
 

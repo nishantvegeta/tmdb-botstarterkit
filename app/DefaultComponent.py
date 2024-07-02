@@ -1,12 +1,22 @@
 from qrlib.QRComponent import QRComponent
 
+from RPA.Browser.Selenium import Selenium
+
+from Utils import read_vaultfile
 
 class DefaultComponent(QRComponent):
     
     def __init__(self):
         super().__init__()
+        self.sel = Selenium(auto_close=False)
 
     def login(self):
+        data = read_vaultfile()
+
+        username = data['username']
+        password = data['password']
+        self.logger.info(username)
+        self.logger.info(password)
         try:
             self.logger.info("Logging in...")
         except Exception as e:
