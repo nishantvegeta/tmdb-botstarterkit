@@ -7,8 +7,8 @@ from qrlib.QRRunItem import QRRunItem
 class QRComponent(QRSubscriber):
 
     def __init__(self):
-        self.run_item: QRRunItem = None
-        self.logger: QRLogger = None
+        self.run_item: QRRunItem = QRRunItem()
+        self.logger: QRLogger = QRLogger()
 
     def notify(self, run_item: QRRunItem):
         self.run_item = run_item

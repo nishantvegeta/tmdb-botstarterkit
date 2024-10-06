@@ -1,6 +1,21 @@
 {
-    "test":{
-        "username":"",
-        "password":""
+    "tmdb":{
+        "search_base_url": "https://www.themoviedb.org/search/movie?query="
+    },
+
+    "postgresql": {
+        "dbname": "movie",
+        "user": "postgres",
+        "password": "postgres",
+        "host": "localhost",
+        "port": "5432"
+    },
+
+    "gmail": {
+        "account": "nishantkumpakha03@gmail.com",
+        "password": "gzcoglfxedsmszpi",
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "recipients_account": "atithi.shrestha60@gmail.com"
     }
 }
